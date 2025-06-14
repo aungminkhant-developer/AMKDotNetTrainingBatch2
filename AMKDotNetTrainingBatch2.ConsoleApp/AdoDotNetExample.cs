@@ -127,11 +127,36 @@ namespace AMKDotNetTrainingBatch2.ConsoleApp
 
             Console.Write("Enter Content: ");
             string content = Console.ReadLine()!;
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             string query = $@"UPDATE [dbo].[Tbl_Blog]
    SET [BlogTitle] = @Title
       ,[BlogAuthor] = @Author
       ,[BlogContent] = @Content
  WHERE BlogId = @BlogId";
+
+            
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", blogId);
+            cmd.Parameters.AddWithValue("@Title", title);
+            cmd.Parameters.AddWithValue("@Author", author);
+            cmd.Parameters.AddWithValue("@Content", content);
+            int result = cmd.ExecuteNonQuery();
+
+            connection.Close();
+
+            Console.WriteLine(result > 0 ? "Update Success!" : "Update Failed!");
+        }
+
+        public void Delete()
+        {
+
+
+            Console.Write("Enter Id: ");
+            string blogId = Console.ReadLine()!;
+            string query = $@"DELETE FROM [dbo].[Tbl_Blog]
+      WHERE BlogId = @BlogId";
 
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             connection.Open();
@@ -142,7 +167,7 @@ namespace AMKDotNetTrainingBatch2.ConsoleApp
 
             connection.Close();
 
-            Console.WriteLine(result > 0 ? "Update Success!" : "Update Failed!");
+            Console.WriteLine(result > 0 ? "Delete Success!" : "Delete Failed!");
         }
     }
 
