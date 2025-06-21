@@ -17,7 +17,13 @@ DapperExample dapperExample = new DapperExample();
 //dapperExample.Edit();
 //dapperExample.Create();
 //dapperExample.Delete();
-dapperExample.Update();
+//dapperExample.Update();
 
+EFCoreExample eFCoreExample = new EFCoreExample();
+eFCoreExample.Read();
+//eFCoreExample.Edit();
+//eFCoreExample.Create();
+//eFCoreExample.Update();
+//eFCoreExample.Delete();
 Console.ReadKey();
 
